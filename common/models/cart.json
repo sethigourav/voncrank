@@ -1,0 +1,32 @@
+{
+  "name": "Cart",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "TimeStamp": true
+  },
+  "properties": {
+    "total": {
+      "type": "number"
+    },
+    "tax": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "items": {
+      "type": "embedsMany",
+      "model": "LineItem",
+      "options": {
+        "validate": false,
+        "autoId": true
+      }
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

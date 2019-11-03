@@ -1,0 +1,174 @@
+{
+  "name": "Account",
+  "base": "User",
+  "strict": true,
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true,
+    "realmRequired": false
+  },
+  "http": {
+    "path": "users"
+  },
+  "mixins": {
+    "TimeStamp": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "type": {
+      "type": "string"
+    },
+    "telephone": {
+      "type": "string",
+      "required": true
+    },
+    "dob": {
+      "type": "date"
+    },
+    "gender": {
+      "type": "string",
+      "required": false
+    },
+    "location": {
+      "type": "geopoint"
+    },
+    "available": {
+      "type": "boolean",
+      "default": true
+    },
+    "active": {
+      "type": "boolean",
+      "required": false
+    },
+    "stripeCustomerId": {
+      "type": "string"
+    },
+    "emailVerified": false,
+    "credentials": false,
+    "challenges": false,
+    "username": false,
+    "status": false
+  },
+  "validations": [],
+  "relations": {
+    "jobs": {
+      "type": "hasMany",
+      "model": "Job",
+      "foreignKey": "customerId"
+    },
+    "assignments": {
+      "type": "hasMany",
+      "model": "Job",
+      "foreignKey": "mechanicId"
+    },
+    "inventory": {
+      "type": "hasOne",
+      "model": "Inventory"
+    },
+    "cart": {
+      "type": "hasOne",
+      "model": "Cart"
+    },
+    "orders":{
+      "type": "hasMany",
+      "model": "Order"
+    },
+    "storage": {
+      "type": "hasOne",
+      "model": "Container"
+    },
+    "bikes": {
+      "type": "hasMany",
+      "model": "Bike",
+      "foreignKey": "customerId"
+    },
+    "address": {
+      "type": "embedsOne",
+      "model": "Address",
+      "options": {
+        "validate": false,
+        "forceId": true,
+        "persistent": true
+      }
+    },
+    "card": {
+      "type": "embedsOne",
+      "model": "Card",
+      "options": {
+        "validate": false,
+        "forceId": true,
+        "persistent": true
+      }
+    }
+  },
+  "acls": [
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "ADMIN",
+      "permission": "ALLOW",
+      "property": [
+        "find",
+        "findById"
+      ]
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": [
+        "findById",
+        "__get__cart",    
+        "__get__bikes",
+        "__get__jobs",
+        "__get__orders",
+        "__findById__bikes",
+        "__findById__jobs"        
+      ]
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "MECHANIC",
+      "permission": "ALLOW",
+      "property": [
+        "__findById__jobs"        
+      ]
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": [
+        "cards",
+        "cartItems",        
+        "chargeCard"
+      ]
+    },
+    {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": [
+        "__create__bikes",        
+        "__create__orders"
+      ]
+    },
+    {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "CUSTOMER",
+      "permission": "ALLOW",
+      "property": [
+        "__create__jobs"
+      ]
+    }
+  ],
+  "methods": {}
+}

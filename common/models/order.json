@@ -1,0 +1,31 @@
+{
+  "name": "Order",
+  "base": "PersistedModel",
+  "strict":true,
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "total": {
+      "type": "number",
+      "required": true
+    },
+    "tax": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "items": {
+      "type": "embedsMany",
+      "model": "LineItem",
+      "options": {
+        "validate": false,
+        "autoId": true
+      }
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

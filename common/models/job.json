@@ -1,0 +1,109 @@
+{
+  "name": "Job",
+  "base": "PersistedModel",
+  "strict": true,
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "TimeStamp": true
+  },
+  "properties": {
+    "status": {
+      "type": "string",
+      "required": true,
+      "default": "INITIAL"
+    },
+    "videoUrl": {
+      "type": "string"
+    },
+    "acceptedAt": {
+      "type": "date"
+    },
+    "completedAt": {
+      "type": "date"
+    },
+    "amount": {
+      "type": "number"
+    },
+    "requestedAt": {
+      "type": "date"
+    },
+    "feedback": {
+      "type": "string"
+    },
+    "location": {
+      "type": "geopoint",
+      "required": true
+    },
+    "serviceType": {
+      "type": "string",
+      "required": true
+    },
+    "reportedProblems": {
+      "type": [
+        "object"
+      ]
+    }
+  },
+  "validations": [],
+  "relations": {
+    "customer": {
+      "type": "belongsTo",
+      "model": "Account",
+      "foreignKey": "customerId"
+    },
+    "mechanic": {
+      "type": "belongsTo",
+      "model": "Account",
+      "foreignKey": "mechanicId",
+      "scope": {
+        "where": {
+          "status": "ASSIGNED"
+        }
+      }
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY",
+      "property": "*"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "ADMIN",
+      "permission": "ALLOW",
+      "property": [
+        "find",
+        "findById"
+      ]
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "findById"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "upload"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "ADMIN",
+      "permission": "ALLOW",
+      "property": "assignments"
+    }
+  ],
+  "methods": {}
+}

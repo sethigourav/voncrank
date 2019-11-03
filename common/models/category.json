@@ -1,0 +1,63 @@
+{
+  "name": "Category",
+  "base": "PersistedModel",
+  "strict": true,
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "http": {
+    "path": "shop/categories"
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "displayOrder": {
+      "type": "number",
+      "default": "0"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "parts": {
+      "type": "hasMany",
+      "model": "Part"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": [
+        "find",
+        "findOne",
+        "findById",
+        "__get__parts"
+      ]
+    },
+    {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "ADMIN",
+      "permission": "ALLOW",
+      "property": [
+        "create",
+        "upsert",
+        "deleteById",
+        "__create__parts",
+        "__delete__parts"
+      ]
+    }
+  ],
+  "methods": {}
+}

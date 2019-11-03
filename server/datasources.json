@@ -1,0 +1,30 @@
+{
+  "default": {
+    "name": "default",
+    "connector": "memory"
+  },
+  "db": {
+    "host": "",
+    "port": 0,
+    "url": "",
+    "database": "voncrank",
+    "password": "",
+    "name": "db",
+    "user": "",
+    "connector": "mongodb"
+  },
+  "push": {
+    "name": "push",
+    "connector": "loopback-component-push",
+    "installation": "installation",
+    "notification": "notification",
+    "application": "application"
+  },
+  "filesystemStorage": {
+    "name": "filesystemStorage",
+    "connector": "loopback-component-storage",
+    "provider": "filesystem",
+    "root": "files",
+    "maxFileSize": "52428800"
+  }
+}

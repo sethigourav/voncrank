@@ -1,0 +1,22 @@
+{
+  "name": "Inventory",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "http": {
+    "path": "inventory"
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {
+    "mechanic": {
+      "type": "belongsTo",
+      "model": "Account",
+      "foreignKey": "mechanicId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

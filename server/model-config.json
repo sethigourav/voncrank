@@ -1,0 +1,112 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../node_modules/loopback-ds-timestamp-mixin",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "User": {
+    "dataSource": "db",
+    "public": false,
+    "options": {
+      "realmRequired": true,
+      "realmDelimiter": ":"
+    }
+  },
+  "AccessToken": {
+    "dataSource": "db",
+    "public": true
+  },
+  "ACL": {
+    "dataSource": "db",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Role": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Job": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Account": {
+    "dataSource": "db",
+    "public": true,
+    "options": {
+      "realmRequired": false
+    }
+  },
+  "Service": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Category": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Part": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Inventory": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Cart": {
+    "dataSource": "db",
+    "public": false
+  },
+  "container": {
+    "dataSource": "filesystemStorage",
+    "public": true
+  },
+  "LineItem": {
+    "dataSource": "db",
+    "public": false
+  },
+  "application": {
+    "dataSource": "db",
+    "public": false
+  },
+  "notification": {
+    "dataSource": "db",
+    "public": false
+  },
+  "push": {
+    "dataSource": "push",
+    "public": false
+  },
+  "installation": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Address": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Card": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Bike": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Order": {
+    "dataSource": "db",
+    "public": true
+  }
+}
